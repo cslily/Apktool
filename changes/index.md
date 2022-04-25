@@ -4,28 +4,72 @@ title: Apktool - Changelog
 description: Apktool - Changelog / Roadmap
 ---
 
-## v2.5.1
-2020.xx.xx
+## v2.6.2 (Unreleased)
+2022.xx.xx
+ * Add SDK S v2 (API 32) support. ([Issue 2776](https://github.com/iBotPeaches/Apktool/issues/2776))
+ * Add support for newest `ResourcesTypes.h` specs (policy, overlay and staged alias). ([Issue 2714](https://github.com/iBotPeaches/Apktool/issues/2714))
+ * Add updated internal aapt2/aapt2 binaries. ([Issue 2787](https://github.com/iBotPeaches/Apktool/pull/2787))
+ * Fix resource unclosed during unknown file handling. ([Issue 2473](https://github.com/iBotPeaches/Apktool/issues/2473)) / (Thanks 
+auermich93)
+ * Fix support for `uses-native-library` in Manifest. ([Issue 2778](https://github.com/iBotPeaches/Apktool/issues/2778))
+ * Fix support for `usesPermissionFlags` in Manifest. ([Issue 2789](https://github.com/iBotPeaches/Apktool/issues/2789))
+ * Revert automatic workaround for using private resources. ([PR 2785](https://github.com/iBotPeaches/Apktool/pull/2785), [Issue 2771](https://github.com/iBotPeaches/Apktool/issues/2771))
+ * Upgrade CI Workflow to leverage latest actions. (Thanks Goooler)
+
+## v2.6.1
+2022.02.26
+ * Add `apktool-cli` to Maven publishing. ([Issue 2686](https://github.com/iBotPeaches/Apktool/issues/2686))
+ * Add support for signature scheme v4 ([Issue 2687](https://github.com/iBotPeaches/Apktool/issues/2687))
+ * Add `commons-lang` project to remove deprecated methods from `commons-io`. ([Issue 2713](https://github.com/iBotPeaches/Apktool/pull/2713/files)) (Thanks alsutton)
+ * Upgrade to `commons-cli 1.5.0` (Thanks Goooler)
+ * Upgrade to `guava 31.0.1` (Thanks Goooler)
+ * Upgrade to `jengelman.shadow 7.1.0` (Thanks Goooler)
+ * Fix `licenseFormat[Test/Main]` to properly inject variables into license preamble.
+ * Fix temp files being written into `/tmp` and not automatically removed. ([Issue 2739](https://github.com/iBotPeaches/Apktool/issues/2739))
+ * Support automatic workaround for using private resources. ([Issue 2637](https://github.com/iBotPeaches/Apktool/issues/2637)) (Thanks MrIkso)
+
+## v2.6.0
+2021.09.02
  
  * **Android 12 Support** ([Issue 2580](https://github.com/iBotPeaches/Apktool/issues/2580))
  * Published to Maven Central ([Issue 2529](https://github.com/iBotPeaches/Apktool/issues/2529))
+ * Upgrade internal aapt/aapt2 to ([7691c of frameworks_base](https://github.com/iBotPeaches/platform_frameworks_base/commit/63f688ebacc6a92ddf298ef6a88edc996017691c))
  * Upgrade to baksmali/smali 2.5.2
- * Upgrade to `gradle 6.8.3`
- * Upgrade to `snakeyaml 1.28` (Thanks Goooler)
+ * Upgrade to `gradle 7.2` (Thanks Goooler)
+ * Upgrade to `snakeyaml 1.29` (Thanks Goooler)
  * Upgrade to `guava 30.1.1-jre` (Thanks Goooler)
  * Upgrade to `junit 4.13.2` (Thanks Goooler)
  * Upgrade to `commons-lang 3.12.0` (Thanks Goooler)
- * Upgrade to `commons-io 2.8.0` (Thanks Goooler)
- * Upgrade to `proguard 7.0.1` (Thanks Goooler)
- * Updated aapt2 with patches for `attr-private` and remove reserved pkgIds. (Thanks MrIkso)
+ * Upgrade to `commons-io 2.11.0` (Thanks Goooler)
+ * Upgrade to `proguard 7.1.1` (Thanks Goooler)
+ * Upgrade to `license.hierynomus 0.16.1` (Thanks Goooler)
+ * Upgrade to `jengelman.shadow 7.0.0` (Thanks Goooler)
+ * Upgrade to `actions/setup-java@v2` (Thanks Goooler)
+ * Added `.gitattributes` (Thanks Goooler)
+ * Added support for SDK in Development (Tiramisu, API 32?)
+ * Added automatic execution of aapt/aapt2 binaries during CI process to find broken builds.
+ * Added automatic `ldd/otool -L` execution during CI process to identify non-static "fat" aapt/aapt2 builds.
+ * Added test execution on Java 15/16 (Now 8-16) during CI process.
+ * Upgrade aapt2 with patches for `attr-private` and remove reserved pkgIds. (Thanks MrIkso)
+ * Upgrade aapt1 with patches for a static binary on Mac arch.
+ * Add lazy init for ResTable for optimizations. ([Issue 2604](https://github.com/iBotPeaches/Apktool/pull/2604)) / (Thanks IgorEisberg)
+ * Add automatic disassemble/assemble JAR files without specifying api level. ([Issue 2605](https://github.com/iBotPeaches/Apktool/pull/2605)) / (Thanks IgorEisberg)
  * Changed zipslip exceptions to skip file instead of exit on failure. ([Issue 2201](https://github.com/iBotPeaches/Apktool/issues/2201))
  * Changed dummy resource names to `APKTOOL_DUPLICATE_{Type}_{RESID}` to prevent starting with numeric ([Issue 2229](https://github.com/iBotPeaches/Apktool/issues/2229))
+ * Changed all Apache License links to `https`. ([Issue 2635](https://github.com/iBotPeaches/Apktool/pull/2635)) / (Thanks Goooler)
+ * Changed `getHTML()` processor to leverage BundleTool for handling complex string values. ([Issue 2632](https://github.com/iBotPeaches/Apktool/issues/2632)) / (Thanks itaybia)
  * Fix decoding issue requiring specific order of chunks (library/table). ([Issue 2099](https://github.com/iBotPeaches/Apktool/issues/2099)) / (Thanks LoyieKing)
  * Fix decoding issues with code points over > 0x10000. ([Issue 2299](https://github.com/iBotPeaches/Apktool/issues/2299)) / (Thanks Comnir)
  * Fix decoding issues with surrogate pair emojis. ([Issue 2546](https://github.com/iBotPeaches/Apktool/issues/2546)) / (Thanks Comnir)
  * Fix NPE when decoding to a custom non-empty root directory. ([Issue 2455](https://github.com/iBotPeaches/Apktool/issues/2455))
  * Fix Android 11 dex NPE due to hidden api restriction flags. ([Issue 2499](https://github.com/iBotPeaches/Apktool/issues/2499)) / (Thanks JesusFreke)
+ * Fix dummy resources being built as type resources vs item resources. ([Issue 2603](https://github.com/iBotPeaches/Apktool/issues/2603))
+ * Fix numeric string meta-data losing context of data type. ([Issue 2611](https://github.com/iBotPeaches/Apktool/issues/2611)) / (Thanks codylund)
  * Reduce code smell failures. ([Issue 2554](https://github.com/iBotPeaches/Apktool/pull/2554)) / (Thanks matteobaccan)
+ * Reduce code smells & correct improper opcode use for baksmali. ([Issue 2604](https://github.com/iBotPeaches/Apktool/pull/2604)) / (Thanks IgorEisberg)
+ * Reduce code smells for unused logic, unneeded casting and newer Java language features. ([Issue 2636](https://github.com/iBotPeaches/Apktool/pull/2636) / (Thanks Goooler)
+ * Remove unused `targetSdkVersion` for source disassemble as value was not populated yet. ([Issue 2604](https://github.com/iBotPeaches/Apktool/pull/2604)) / (Thanks IgorEisberg)
+ * Remove duplicate workflows for 1 unified GitHub Action workflow. ([Issue 2633](https://github.com/iBotPeaches/Apktool/pull/2633)) / (Thanks Goooler)
 
 ## v2.5.0
 2020.12.02
