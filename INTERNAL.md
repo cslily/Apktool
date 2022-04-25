@@ -110,6 +110,7 @@ We upload the binaries into 3 places.
 1. [Bitbucket Downloads](https://bitbucket.org/iBotPeaches/apktool/downloads)
 2. [Github Releases](https://github.com/iBotPeaches/Apktool/releases) - Since `2.2.1`.
 3. [Backup Mirror](https://connortumbleson.com/apktool/)
+4. [Sonatype (Maven)](https://oss.sonatype.org)
 
 #### Bitbucket
 
@@ -148,8 +149,18 @@ Check the `md5.md5sum` file for the hashes. The file will look something like th
 Additionally check the `sha256.shasum` file for the hashes. This file will look almost identical to the above
 except for containing sha256 hashes.
 
-The hashes match so we have uploaded the binaries to all 3 locations. Time to get writing the release
-post.
+The hashes match so we are good with the backup server.
+
+
+#### Sonatype
+
+You'll want to log in and view the Staging repostories and confirm you see the recently made build. You'll want to:
+
+ * Close it (Wait for audit report email)
+ * Release it (Drop the staging repository)
+ * Wait 20min - 2 hours for it to appear [here](https://mvnrepository.com/artifact/org.apktool/apktool-lib)
+
+With those done, time to get writing the release post.
 
 We currently blog the releases on the [Connor Tumbleson personal blog](https://connortumbleson.com/).
 This may change and the formatting of these release posts change over time.
@@ -245,7 +256,7 @@ to get the source downloaded. This is no small download, expect to use 150-250GB
 After that, you need to build AOSP via this [documentation](https://source.android.com/source/building.html) guide. Now
 we aren't building the entire AOSP package, the initial build is to just see if you are capable of building it.
 
-We check out a certain tag or branch. Currently we use 
+We check out a certain tag or branch. Currently we use
 
  * aapt2 - `master`.
  * aapt1 - `master`.
@@ -266,7 +277,7 @@ The steps below are different per flavor and operating system.
 #### Linux / Windows
 1. `source build/envsetup.sh`
 2. `lunch sdk-eng`
-3. `make LOCAL_MULTILIB=64 USE_NINJA=false aapt`
+3. `m aapt`
 4. `strip out/host/linux-x86/bin/aapt`
 5. `strip out/host/linux-x86/bin/aapt_64`
 6. `strip out/host/windows-x86/bin/aapt.exe`
@@ -274,9 +285,8 @@ The steps below are different per flavor and operating system.
 
 #### Mac
 1. `source build/envsetup.sh`
-2. `lunch sdk-eng`
-3. `make LOCAL_MULTILIB=64 USE_NINJA=false aapt`
-4. `strip out/host/darwin-x86/bin/aapt_64`
+2. `m aapt`
+3. `strip out/host/darwin-x86/bin/aapt_64`
 
 32/64 bit binaries will be built for Linux and Windows.
 
@@ -285,7 +295,7 @@ The steps below are different per flavor and operating system.
 The steps below are different per flavor and operating system.
 
 #### Linux / Windows
-1. `make LOCAL_MULTILIB=64 USE_NINJA=false aapt2`
+1. `m aapt2`
 2. `strip out/host/linux-x86/bin/aapt2`
 3. `strip out/host/linux-x86/bin/aapt2_64`
 4. `strip out/host/windows-x86/bin/aapt2.exe`
@@ -294,7 +304,7 @@ The steps below are different per flavor and operating system.
 #### Mac
 1. `export ANDROID_JAVA_HOME=/Path/To/Jdk`
 2. `source build/envsetup.sh`
-3. `make LOCAL_MULTILIB=64 USE_NINJA=false aapt2`
+3. `m aapt2`
 4. `strip out/host/darwin-x86/bin/aapt2_64`
 
 #### Confirming aapt/aapt2 builds are static

@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,12 +32,9 @@ import java.io.InputStream;
 import java.util.logging.Logger;
 
 public class SmaliBuilder {
+
     public static void build(ExtFile smaliDir, File dexFile, int apiLevel) throws AndrolibException {
         new SmaliBuilder(smaliDir, dexFile, apiLevel).build();
-    }
-
-    public static void build(ExtFile smaliDir, File dexFile) throws AndrolibException {
-        new SmaliBuilder(smaliDir, dexFile, 0).build();
     }
 
     private SmaliBuilder(ExtFile smaliDir, File dexFile, int apiLevel) {
@@ -85,7 +82,7 @@ public class SmaliBuilder {
 
     private final ExtFile mSmaliDir;
     private final File mDexFile;
-    private int mApiLevel = 0;
+    private final int mApiLevel;
 
     private final static Logger LOGGER = Logger.getLogger(SmaliBuilder.class.getName());
 }

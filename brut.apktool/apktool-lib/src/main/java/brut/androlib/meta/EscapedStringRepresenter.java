@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,21 +16,21 @@
  */
 package brut.androlib.meta;
 
-import org.yaml.snakeyaml.constructor.AbstractConstruct;
-import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.nodes.Node;
-import org.yaml.snakeyaml.nodes.ScalarNode;
-import org.yaml.snakeyaml.nodes.Tag;
+import org.yaml.snakeyaml.representer.Representer;
 
-public class StringExConstructor extends Constructor {
-    public StringExConstructor() {
-        this.yamlConstructors.put(Tag.STR, new ConstructStringEx());
+public class EscapedStringRepresenter extends Representer {
+    public EscapedStringRepresenter() {
+        RepresentStringEx representStringEx = new RepresentStringEx();
+        multiRepresenters.put(String.class, representStringEx);
+        representers.put(String.class, representStringEx);
     }
 
-    private class ConstructStringEx extends AbstractConstruct {
-        public Object construct(Node node) {
-            String val = (String) constructScalar((ScalarNode) node);
-            return YamlStringEscapeUtils.unescapeString(val);
+    private class RepresentStringEx extends RepresentString {
+
+        @Override
+        public Node representData(Object data) {
+            return super.representData(YamlStringEscapeUtils.escapeString(data.toString()));
         }
     }
 }

@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,6 +25,11 @@ public class CantFindFrameworkResException extends AndrolibException {
 
 	public int getPkgId() {
 		return mPkgId;
+	}
+
+	@Override
+	public String getMessage() {
+		return String.format("Can't find framework resources for package of id: %d", this.getPkgId());
 	}
 
 	private final int mPkgId;
